@@ -1,6 +1,6 @@
 # Creatures
-A small evolution simulator.
+![Main view of creatures](http://i.imgur.com/SWLUHUf.png)
+Creatures is a small evolution simulator. It's about creatures trying to survive and procreate.
+Each new creature inherits the properties of it's parents, combined with mutations. This leads to gradual changes in the distribution of certain attributes. These changes can be graphically seen in a statistics module.
 
-This project uses JCommon and JFreeChart (Included in project). You can download documentation for JFreeChart here: http://sourceforge.net/projects/jfreechart/files/
-
-You can drag the mouse to move the display and scroll your mouse wheel to zoom.
+For more information take a look at the [Wiki](https://github.com/thopit/Creatures/wiki).
