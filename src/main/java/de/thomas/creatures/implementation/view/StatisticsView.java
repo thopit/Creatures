@@ -40,9 +40,6 @@ public class StatisticsView extends JFrame {
 	private JCheckBox averageBreedProgressSpeedCheckBox;
 	private JCheckBox genderRatioCheckBox;
 	private JCheckBox pregnancyRatioCheckBox;
-	
-	private JButton displayButton;
-
 
 	public StatisticsView(Vector<StatElement> statElements) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,8 +70,6 @@ public class StatisticsView extends JFrame {
 		genderRatioCheckBox = new JCheckBox("Average Max Life");
 		pregnancyRatioCheckBox = new JCheckBox("Average Max Life");
 		
-		displayButton = new JButton("Display");
-
 		XYDataset dataset = createDataset(statElements, false);
 		chart = createChart(dataset);
 		chartPanel = new ChartPanel(chart);
@@ -155,46 +150,6 @@ public class StatisticsView extends JFrame {
 
 		return dataset;
 	}
-	
-	private XYDataset createSecondDataset() {
-
-		final XYSeries series1 = new XYSeries("First");
-		series1.add(1.0, 1.0);
-		series1.add(2.0, 11.0);
-		series1.add(3.0, 3.0);
-		series1.add(4.0, 5.0);
-		series1.add(5.0, 23.0);
-		series1.add(6.0, 7.0);
-		series1.add(7.0, 7.0);
-		series1.add(8.0, 11.0);
-
-		final XYSeries series2 = new XYSeries("Second");
-		series2.add(1.0, 5.0);
-		series2.add(2.0, 2.0);
-		series2.add(3.0, 6.0);
-		series2.add(4.0, 8.0);
-		series2.add(5.0, 44.0);
-		series2.add(6.0, 4.0);
-		series2.add(7.0, 9.0);
-		series2.add(8.0, 1.0);
-
-		final XYSeries series3 = new XYSeries("Third");
-		series3.add(3.0, 4.0);
-		series3.add(4.0, 3.0);
-		series3.add(5.0, 34.0);
-		series3.add(6.0, 3.0);
-		series3.add(7.0, 60.0);
-		series3.add(8.0, 3.0);
-		series3.add(9.0, 14.0);
-		series3.add(10.0, 3.0);
-
-		final XYSeriesCollection dataset = new XYSeriesCollection();
-		dataset.addSeries(series1);
-		dataset.addSeries(series2);
-		dataset.addSeries(series3);
-
-		return dataset;
-	}
 
 	private JFreeChart createChart(final XYDataset dataset) {
 		// create the chart...
@@ -212,9 +167,6 @@ public class StatisticsView extends JFrame {
 		// NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
 		chart.setBackgroundPaint(Color.white);
 
-		//final StandardLegend legend = (StandardLegend) chart.getLegend();
-		//legend.setDisplaySeriesShapes(true);
-
 		// get a reference to the plot for further customisation...
 		final XYPlot plot = chart.getXYPlot();
 		plot.setBackgroundPaint(Color.lightGray);
@@ -222,12 +174,6 @@ public class StatisticsView extends JFrame {
 		plot.setDomainGridlinePaint(Color.white);
 		plot.setRangeGridlinePaint(Color.white);
 
-		/*
-		final XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-		renderer.setSeriesLinesVisible(0, false);
-		renderer.setSeriesShapesVisible(1, false);
-		plot.setRenderer(renderer);
-		*/
 
 		// change the auto tick unit selection to integer units only...
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
@@ -235,15 +181,5 @@ public class StatisticsView extends JFrame {
 		// OPTIONAL CUSTOMISATION COMPLETED.
 
 		return chart;
-	}
-
-	private void createNewChartPanel() {
-		remove(chartPanel);
-		XYDataset dataset = createSecondDataset();
-		chart = createChart(dataset);
-		chartPanel = new ChartPanel(chart);
-		add(chartPanel);
-		revalidate();
-		repaint();
 	}
 }
