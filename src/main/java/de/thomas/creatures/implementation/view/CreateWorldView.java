@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import de.thomas.creatures.implementation.WorldCreator;
 import de.thomas.creatures.implementation.factories.WorldFactory;
 import de.thomas.creatures.implementation.model.WorldModel;
+import de.thomas.creatures.implementation.util.AssertionException;
+import de.thomas.creatures.implementation.util.AssertionHelper;
 
 public class CreateWorldView extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -107,8 +109,15 @@ public class CreateWorldView extends JFrame implements ActionListener {
 			return;
 		}
 		
-		if (foodRate < 0 || foodRate > 100) {
-			JOptionPane.showMessageDialog(this, "Food rate must be between 0 and 100.", "Wrong input", JOptionPane.WARNING_MESSAGE);
+		try {
+			AssertionHelper.checkSmallerZero(foodRate, "Food Rate");
+			AssertionHelper.checkSmallerEqualThan(foodRate, 100,  "Food Rate");
+			AssertionHelper.checkSmallerZero(width, "Width");
+			AssertionHelper.checkSmallerZero(height, "Height");
+			
+		}
+		catch (AssertionException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Wrong input", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 
