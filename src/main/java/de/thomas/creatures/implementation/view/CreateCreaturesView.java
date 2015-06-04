@@ -18,6 +18,8 @@ import de.thomas.creatures.implementation.ai.BasicAI;
 import de.thomas.creatures.implementation.controller.WorldController;
 import de.thomas.creatures.implementation.model.Creature;
 import de.thomas.creatures.implementation.model.Creature.Gender;
+import de.thomas.creatures.implementation.util.AssertionException;
+import de.thomas.creatures.implementation.util.AssertionHelper;
 import de.thomas.creatures.implementation.util.VariationHelper;
 
 public class CreateCreaturesView extends JFrame implements ActionListener {
@@ -49,6 +51,7 @@ public class CreateCreaturesView extends JFrame implements ActionListener {
 	
 	private JButton createButton;
 
+	//TODO Default Values
 	public CreateCreaturesView(WorldController worldController, double width, double height) {
 		this.worldController = worldController;
 		this.width = width;
@@ -206,7 +209,38 @@ public class CreateCreaturesView extends JFrame implements ActionListener {
 			return;
 		}
 		
-		//TODO check values
+		try {
+			AssertionHelper.checkSmallerZero(amount, "Amount");
+			AssertionHelper.checkSmallerZero(maxEnergy, "Max Energy");
+			AssertionHelper.checkSmallerZero(maxLife, "Max Life");
+			AssertionHelper.checkSmallerZero(speed, "Speed");
+			AssertionHelper.checkSmallerZero(visionRange, "Vision Range");
+			AssertionHelper.checkSmallerZero(maleRation, "Male Ratio");
+			AssertionHelper.checkSmallerZero(matingEnergyNeeded, "Mating Energy Needed");
+			AssertionHelper.checkSmallerZero(breedLength, "Breed Length");
+			AssertionHelper.checkSmallerZero(breedProgressSpeed, "Breed Progress Speed");
+			AssertionHelper.checkSmallerZero(maxEnergyVariance, "Max Energy Variance");
+			AssertionHelper.checkSmallerZero(maxLifeVariance, "Max Life Variance");
+			AssertionHelper.checkSmallerZero(speedVariance, "Speed Variance");
+			AssertionHelper.checkSmallerZero(visionRangeVariance, "Vision Range Variance");
+			AssertionHelper.checkSmallerZero(matingEnergyNeededVariance, "Mating Energy Needed Variance");
+			AssertionHelper.checkSmallerZero(breedLengthVariance, "Breed Length Variance");
+			AssertionHelper.checkSmallerZero(breedProgressSpeedVariance, "Breed Progress Speed Variance");
+			
+			AssertionHelper.checkSmallerEqualThan(maleRation, 100, "Male Ratio");
+			
+			AssertionHelper.checkSmallerEqualThan(maxEnergyVariance, maxEnergy, "Max Energy Variance");
+			AssertionHelper.checkSmallerEqualThan(maxLifeVariance, maxLife, "Max Life Variance");
+			AssertionHelper.checkSmallerEqualThan(speedVariance, speed, "Speed Variance");
+			AssertionHelper.checkSmallerEqualThan(visionRangeVariance, visionRange, "Vision Range Variance");
+			AssertionHelper.checkSmallerEqualThan(matingEnergyNeededVariance, matingEnergyNeeded, "Mating Energy Needed Variance");
+			AssertionHelper.checkSmallerEqualThan(breedLengthVariance, breedLength, "Breed Length Variance");
+			AssertionHelper.checkSmallerEqualThan(breedProgressSpeedVariance, breedProgressSpeed, "Breed Progress Speed Variance");
+		}
+		catch (AssertionException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Wrong input", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
 		
 		for (int k = 0; k < amount; k++) {
 			Gender gnd;

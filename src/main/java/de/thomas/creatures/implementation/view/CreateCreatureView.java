@@ -19,11 +19,15 @@ import de.thomas.creatures.implementation.ai.BasicAI;
 import de.thomas.creatures.implementation.controller.WorldController;
 import de.thomas.creatures.implementation.model.Creature;
 import de.thomas.creatures.implementation.model.Creature.Gender;
+import de.thomas.creatures.implementation.util.AssertionException;
+import de.thomas.creatures.implementation.util.AssertionHelper;
 
 public class CreateCreatureView extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	private WorldController worldController;
+	private double width;
+	private double height;
 	
 	private JPanel backPanel;
 	private JTextField maxEnergyInput;
@@ -39,13 +43,15 @@ public class CreateCreatureView extends JFrame implements ActionListener {
 	private JButton createButton;
 
 	//TODO Default values (Save if changed)
-	public CreateCreatureView(WorldController worldController) {
+	public CreateCreatureView(WorldController worldController, double width, double height) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(300, 300);
 		setLocationRelativeTo(null);
 		setTitle("Create Creature");
 		
 		this.worldController = worldController;
+		this.width = width;
+		this.height = height;
 
 		initUI();
 
@@ -163,7 +169,24 @@ public class CreateCreatureView extends JFrame implements ActionListener {
 			return;
 		}
 		
-		//TODO Check values (> 0 etc.)
+		try {
+			AssertionHelper.checkSmallerZero(maxEnergy, "Max Energy");
+			AssertionHelper.checkSmallerZero(maxLife, "Max Life");
+			AssertionHelper.checkSmallerZero(positionX, "Position X");
+			AssertionHelper.checkSmallerZero(positionY, "Position Y");
+			AssertionHelper.checkSmallerZero(speed, "Speed");
+			AssertionHelper.checkSmallerZero(visionRange, "Vision Range");
+			AssertionHelper.checkSmallerZero(matingEnergyNeeded, "Mating Energy Needed");
+			AssertionHelper.checkSmallerZero(breedLength, "Breed Length");
+			AssertionHelper.checkSmallerZero(breedProgressSpeed, "Breed Progress Speed");
+			
+			AssertionHelper.checkSmallerEqualThan(positionX, width, "Position X");
+			AssertionHelper.checkSmallerEqualThan(positionY, height, "Position Y");
+		}
+		catch (AssertionException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Wrong input", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
 		
 		Gender gnd;
 		if (gender.equals("Male"))

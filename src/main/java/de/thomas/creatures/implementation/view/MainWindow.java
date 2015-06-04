@@ -180,7 +180,7 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 			new CreateWorldView(worldCreator);
 		}
 		else if (e.getSource() == createCreatureItem) {
-			new CreateCreatureView(controller);
+			new CreateCreatureView(controller, worldModel.getWidth(), worldModel.getHeight());
 		}
 		else if (e.getSource() == createCreaturesItem) {
 			new CreateCreaturesView(controller, worldModel.getWidth(), worldModel.getHeight());
