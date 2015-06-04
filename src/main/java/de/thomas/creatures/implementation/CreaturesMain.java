@@ -51,7 +51,7 @@ public class CreaturesMain implements WorldCreator, ActionListener {
 		view.addMouseListener(listener);
 		view.addMouseWheelListener(listener);
 		
-		mainWindow = new MainWindow(view, controller, statistics, this);
+		mainWindow = new MainWindow(view, controller, statistics, this, worldModel);
 		
 		controller.setMainWindow(mainWindow);
 		
@@ -65,6 +65,11 @@ public class CreaturesMain implements WorldCreator, ActionListener {
 		double currentTime = System.nanoTime();
 		double delta = (System.nanoTime() - lastTime) / 1E9;
 		lastTime = currentTime;
+		
+		
+		if (WorldModel.speedFactor == 0) {
+			return;
+		}
 		
 		for (Creature c : worldModel.getCreatures()) {
 			c.update();
@@ -119,6 +124,7 @@ public class CreaturesMain implements WorldCreator, ActionListener {
 		mainWindow.setController(controller);
 		mainWindow.setStatistics(statistics);
 		mainWindow.setWorldCreator(this);
+		mainWindow.setWorldModel(worldModel);
 		
 		controller.setMainWindow(mainWindow);
 		

@@ -19,6 +19,7 @@ import javax.swing.event.ChangeListener;
 
 import de.thomas.creatures.implementation.WorldCreator;
 import de.thomas.creatures.implementation.controller.WorldController;
+import de.thomas.creatures.implementation.model.WorldModel;
 import de.thomas.creatures.implementation.statistics.StatElement;
 import de.thomas.creatures.implementation.statistics.Statistics;
 
@@ -28,6 +29,7 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 	private Statistics statistics;
 	private WorldController controller;
 	private WorldCreator worldCreator;
+	private WorldModel worldModel;
 	
 	private JSplitPane splitPane;
 	
@@ -51,11 +53,12 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 	
 	private boolean isExternalUpdate = false;
 
-	public MainWindow(WorldView view, WorldController controller, Statistics statistics, WorldCreator worldCreator) {
+	public MainWindow(WorldView view, WorldController controller, Statistics statistics, WorldCreator worldCreator, WorldModel worldModel) {
 		this.view = view;
 		this.controller = controller;
 		this.statistics = statistics;
 		this.worldCreator = worldCreator;
+		this.worldModel = worldModel;
 
 		initUI(view);
 
@@ -180,7 +183,7 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 			new CreateCreatureView(controller);
 		}
 		else if (e.getSource() == createCreaturesItem) {
-			new CreateCreaturesView();
+			new CreateCreaturesView(controller, worldModel.getWidth(), worldModel.getHeight());
 		}
 		else if (e.getSource() == showStatisticsItem) {
 			new StatisticsView(statistics.getStatElements());
@@ -202,5 +205,9 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 
 	public void setWorldCreator(WorldCreator worldCreator) {
 		this.worldCreator = worldCreator;
+	}
+
+	public void setWorldModel(WorldModel worldModel) {
+		this.worldModel = worldModel;
 	}
 }

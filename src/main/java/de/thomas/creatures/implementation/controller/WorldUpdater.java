@@ -10,6 +10,7 @@ import de.thomas.creatures.implementation.model.Creature;
 import de.thomas.creatures.implementation.model.Creature.Gender;
 import de.thomas.creatures.implementation.model.Food;
 import de.thomas.creatures.implementation.model.WorldModel;
+import de.thomas.creatures.implementation.util.VariationHelper;
 
 public class WorldUpdater {
 	private WorldModel worldModel;
@@ -182,21 +183,24 @@ public class WorldUpdater {
 
 	private Creature createFetus(Creature father, Creature mother) {
 		double energy = mother.getBreedLength();
-		double maxEnergy = ((father.getMaxEnergy() + mother.getMaxEnergy()) / 2) * mutationFactor(WorldModel.mutationRate);
-		double maxLife = ((father.getMaxLife() + mother.getMaxLife()) / 2) * mutationFactor(WorldModel.mutationRate);
+		double maxEnergy = ((father.getMaxEnergy() + mother.getMaxEnergy()) / 2) * VariationHelper.mutationFactor(WorldModel.mutationRate);
+		double maxLife = ((father.getMaxLife() + mother.getMaxLife()) / 2) * VariationHelper.mutationFactor(WorldModel.mutationRate);
 		//Position will be added later
 		Point.Double position = null;
-		double speed = ((father.getSpeed() + mother.getSpeed()) / 2) * mutationFactor(WorldModel.mutationRate);
-		double visionRange = ((father.getVisionRange() + mother.getVisionRange()) / 2) * mutationFactor(WorldModel.mutationRate);
+		double speed = ((father.getSpeed() + mother.getSpeed()) / 2) * VariationHelper.mutationFactor(WorldModel.mutationRate);
+		double visionRange = ((father.getVisionRange() + mother.getVisionRange()) / 2) * VariationHelper.mutationFactor(WorldModel.mutationRate);
 		Gender gender;
 		if (Math.random() >= 0.5)
 			gender = Gender.MALE;
 		else
 			gender = Gender.FEMALE;
 		CreatureAI ai = new BasicAI();
-		double matingEnergyNeeded = ((father.getMatingEnergyNeeded() + mother.getMatingEnergyNeeded()) / 2) * mutationFactor(WorldModel.mutationRate);
-		double breedLength = ((father.getBreedLength() + mother.getBreedLength()) / 2) * mutationFactor(WorldModel.mutationRate);
-		double breedProgressSpeed = ((father.getBreedProgressSpeed() + mother.getBreedProgressSpeed()) / 2) * mutationFactor(WorldModel.mutationRate);
+		double matingEnergyNeeded = ((father.getMatingEnergyNeeded() + mother.getMatingEnergyNeeded()) / 2)
+				* VariationHelper.mutationFactor(WorldModel.mutationRate);
+		double breedLength = ((father.getBreedLength() + mother.getBreedLength()) / 2) * 
+				VariationHelper.mutationFactor(WorldModel.mutationRate);
+		double breedProgressSpeed = ((father.getBreedProgressSpeed() + mother.getBreedProgressSpeed()) / 2) * 
+				VariationHelper.mutationFactor(WorldModel.mutationRate);
 
 		Creature fetus = new Creature(energy, 
 				maxEnergy, 
@@ -211,18 +215,5 @@ public class WorldUpdater {
 				breedProgressSpeed);
 
 		return fetus;
-	}
-
-	private double mutationFactor(double mutationRate) {
-		double mutationDelta = Math.random() * mutationRate;
-
-		double plusOrMinus = Math.random();
-
-		if (plusOrMinus > 0.5) {
-			return 1 + mutationDelta;
-		}
-		else {
-			return 1 - mutationDelta;
-		}
 	}
 }
