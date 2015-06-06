@@ -3,9 +3,11 @@ package de.thomas.creatures.implementation.view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -16,9 +18,13 @@ import javax.swing.JSlider;
 import javax.swing.JSplitPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.commons.io.FilenameUtils;
 
 import de.thomas.creatures.implementation.WorldCreator;
 import de.thomas.creatures.implementation.controller.WorldController;
+import de.thomas.creatures.implementation.files.StatisticsSerializer;
 import de.thomas.creatures.implementation.model.WorldModel;
 import de.thomas.creatures.implementation.statistics.StatElement;
 import de.thomas.creatures.implementation.statistics.Statistics;
@@ -39,8 +45,7 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 	
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
-	private JMenuItem openItem;
-	private JMenuItem preferencesItem;
+	private JMenuItem exportStatisticsItem;
 	private JMenuItem closeItem;
 	
 	private JMenu worldMenu;
@@ -103,15 +108,11 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 		menuBar = new JMenuBar();
 		
 		fileMenu = new JMenu("File");
-		openItem = new JMenuItem("Open");
-		openItem.addActionListener(this);
-		preferencesItem = new JMenuItem("Preferences");
-		preferencesItem.addActionListener(this);
+		exportStatisticsItem = new JMenuItem("Export Statistics");
+		exportStatisticsItem.addActionListener(this);
 		closeItem = new JMenuItem("Close");
 		closeItem.addActionListener(this);
-		fileMenu.add(openItem);
-		fileMenu.addSeparator();
-		fileMenu.add(preferencesItem);
+		fileMenu.add(exportStatisticsItem);
 		fileMenu.addSeparator();
 		fileMenu.add(closeItem);
 		
@@ -175,6 +176,23 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == closeItem) {
 			System.exit(0);
+		}
+		else if (e.getSource() == exportStatisticsItem) {
+			JFileChooser fileChooser = new JFileChooser();
+			FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("CSV (comma-separated) (*.csv)", "csv");
+			fileChooser.setFileFilter(csvFilter);
+			
+			
+			
+			if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				
+				if (fileChooser.getFileFilter() == csvFilter && ! FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("csv")) {
+					file = new File(file.toString() + ".csv");
+				}
+				
+				new StatisticsSerializer().exportStatistics(statistics.getStatElements(), file);
+			}
 		}
 		else if (e.getSource() == createWorldItem) {
 			new CreateWorldView(worldCreator);
