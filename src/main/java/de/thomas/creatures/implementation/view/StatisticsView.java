@@ -128,7 +128,7 @@ public class StatisticsView extends JFrame {
 			averageBreedLength.add(current, element.getAverageBreedLength());
 			averageBreedProgressSpeed.add(current, element.getAverageBreedProgressSpeed());
 			genderRatio.add(current, element.getGenderRatio());
-			pregnancyRatio.add(current, element.getGenderRatio());
+			pregnancyRatio.add(current, element.getPregnancyRatio());
 			
 			current++;
 		}

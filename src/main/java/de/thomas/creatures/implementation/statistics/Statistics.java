@@ -87,7 +87,7 @@ public class Statistics {
 		averageBreedLength = totalAverageBreedLength / creatureAmount;
 		averageBreedProgressSpeed = totalAverageBreedProgressSpeed / creatureAmount;
 		genderRatio = femaleAmount / creatureAmount;
-		pregnancyRatio = pregnancyAmount / genderRatio;
+		pregnancyRatio = pregnancyAmount / (genderRatio * creatureAmount);
 
 		StatElement element = new StatElement(
 				creatureAmount, 
