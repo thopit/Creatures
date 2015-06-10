@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 
-version = '0.6'
+version = '0.6.1'
 mainClassName = "de.thomas.creatures.implementation.CreaturesMain"
 
 repositories {

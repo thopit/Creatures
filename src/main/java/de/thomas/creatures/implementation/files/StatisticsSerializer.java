@@ -3,6 +3,7 @@ package de.thomas.creatures.implementation.files;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Vector;
 
 import de.thomas.creatures.implementation.statistics.StatElement;
@@ -20,6 +21,7 @@ public class StatisticsSerializer {
 
 	private String getSerialization(Vector<StatElement> elements) {
 		StringBuilder builder = new StringBuilder();
+		DecimalFormat df = new DecimalFormat("#.0000");
 		
 		builder.append("\"Creature Amount\"");
 		builder.append(";");
@@ -49,27 +51,27 @@ public class StatisticsSerializer {
 		for (StatElement element : elements) {
 			builder.append(element.getCreatureAmount());
 			builder.append(";");
-			builder.append(element.getAverageLife());
+			builder.append(df.format(element.getAverageLife()));
 			builder.append(";");
-			builder.append(element.getAverageMaxLife());
+			builder.append(df.format(element.getAverageMaxLife()));
 			builder.append(";");
-			builder.append(element.getAverageEnergy());
+			builder.append(df.format(element.getAverageEnergy()));
 			builder.append(";");
-			builder.append(element.getAverageMaxEnergy());
+			builder.append(df.format(element.getAverageMaxEnergy()));
 			builder.append(";");
-			builder.append(element.getAverageSpeed());
+			builder.append(df.format(element.getAverageSpeed()));
 			builder.append(";");
-			builder.append(element.getAverageVisionRange());
+			builder.append(df.format(element.getAverageVisionRange()));
 			builder.append(";");
-			builder.append(element.getAverageMatingEnergyNeeded());
+			builder.append(df.format(element.getAverageMatingEnergyNeeded()));
 			builder.append(";");
-			builder.append(element.getAverageBreedLength());
+			builder.append(df.format(element.getAverageBreedLength()));
 			builder.append(";");
-			builder.append(element.getAverageBreedProgressSpeed());
+			builder.append(df.format(element.getAverageBreedProgressSpeed()));
 			builder.append(";");
-			builder.append(element.getGenderRatio());
+			builder.append(df.format(element.getGenderRatio()));
 			builder.append(";");
-			builder.append(element.getPregnancyRatio());
+			builder.append(df.format(element.getPregnancyRatio()));
 			builder.append(System.lineSeparator());
 		}
 		
