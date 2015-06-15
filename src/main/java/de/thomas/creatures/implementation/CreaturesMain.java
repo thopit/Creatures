@@ -66,25 +66,20 @@ public class CreaturesMain implements WorldCreator, ActionListener {
 		double delta = (System.nanoTime() - lastTime) / 1E9;
 		lastTime = currentTime;
 		
-		
-		if (WorldModel.speedFactor == 0) {
-			return;
-		}
-		
-		for (Creature c : worldModel.getCreatures()) {
-			c.update();
-		}
-		
-		mainWindow.update(delta);
-		
-		
-		controller.updateWorld(delta);
 		listener.handlePressedKeys();
 		listener.handlePressedMouseButtons(view);
+		
 		view.repaint();
 		
-		statistics.update(delta);
-		//view.paintImmediately(0, 0, (int) (1366 * 0.8), 768);
+		if (WorldModel.speedFactor > 0) {
+			for (Creature c : worldModel.getCreatures()) {
+				c.update();
+			}
+			
+			mainWindow.update(delta);
+			controller.updateWorld(delta);
+			statistics.update(delta);
+		}
 	}
 	
 	public static void main(String[] args) {
