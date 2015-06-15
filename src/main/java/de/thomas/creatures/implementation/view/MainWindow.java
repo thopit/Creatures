@@ -1,6 +1,7 @@
 package de.thomas.creatures.implementation.view;
 
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,7 +16,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -42,6 +46,8 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 	private JLabel textLabel;
 	private JLabel speedLabel;
 	private JSlider speedSlider;
+	private JLabel maxFoodLabel;
+	private JSpinner maxFoodSpinner;
 	
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
@@ -95,10 +101,24 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 		speedSlider.setPaintTicks(true);
 		speedSlider.addChangeListener(this);
 		
+		JPanel maxFoodContainer = new JPanel();
+		maxFoodContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
+		maxFoodContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		maxFoodLabel = new JLabel("Max Food");
+		SpinnerModel maxFoodSpinnerModel = new SpinnerNumberModel(WorldModel.maxFoodAmount, 0, 100000, 1);
+		maxFoodSpinner = new JSpinner(maxFoodSpinnerModel);
+		maxFoodSpinner.setEditor(new JSpinner.NumberEditor(maxFoodSpinner, "#"));
+		maxFoodSpinner.addChangeListener(this);
+		
+		maxFoodContainer.add(maxFoodLabel);
+		maxFoodContainer.add(maxFoodSpinner);
+		
 		rightContainer.add(textLabel);
 		rightContainer.add(Box.createVerticalStrut(10));
 		rightContainer.add(speedLabel);
 		rightContainer.add(speedSlider);
+		rightContainer.add(maxFoodContainer);
 
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, view, rightContainer);
 		splitPane.setResizeWeight(0.8);
@@ -159,6 +179,10 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 			int value = source.getValue();
 			
 			controller.setSpeed(value);
+		}
+		else if (e.getSource() == maxFoodSpinner) {
+			JSpinner source = (JSpinner) e.getSource();
+			WorldModel.maxFoodAmount = (int) source.getValue();
 		}
 	}
 
