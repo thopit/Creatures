@@ -7,7 +7,7 @@ public class WorldModel {
 	public static int maxFoodEnergy = 100;
 	public static int maxFoodAmount = 500;
 	public static double baseEnergyDepletionRate = 1;
-	public static double speedEnergyDepleionFactor = 0.5;
+	public static double speedEnergyDepletionFactor = 0.5;
 	public static double mutationRate = 0.1;
 	public static double speedFactor = 1;
 	
