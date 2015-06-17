@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -228,7 +229,7 @@ public class MainWindow extends JFrame implements ActionListener , ChangeListene
 			new CreateCreaturesView(controller, worldModel.getWidth(), worldModel.getHeight());
 		}
 		else if (e.getSource() == showStatisticsItem) {
-			new StatisticsView(statistics.getStatElements());
+			new StatisticsView(new Vector<StatElement>(statistics.getStatElements()));
 		}
 	}
 	
