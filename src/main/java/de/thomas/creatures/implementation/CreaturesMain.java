@@ -24,11 +24,9 @@ public class CreaturesMain implements WorldCreator, ActionListener {
 	private WorldInputListener listener;
 	private Statistics statistics;
 	private MainWindow mainWindow;
-	int counter;
+	private double lastTime;
 	
 	private final int REFRESH_TIME = 15;
-	
-	private double lastTime;
 	
 	public CreaturesMain() {
 		initProgram();
