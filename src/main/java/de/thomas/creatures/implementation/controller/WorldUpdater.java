@@ -140,6 +140,10 @@ public class WorldUpdater {
 
 		if (creature.getEnergy() <= 1) {
 			creatureIterator.remove();
+			
+			if (creatureIterator.hasNext()) {
+				creatureIterator.next();
+			}
 		}
 	}
 
@@ -148,6 +152,10 @@ public class WorldUpdater {
 
 		if (creature.getLife() >= creature.getMaxLife()) {
 			creatureIterator.remove();
+			
+			if (creatureIterator.hasNext()) {
+				creatureIterator.next();
+			}
 		}
 	}
 
