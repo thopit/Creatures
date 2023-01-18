@@ -21,6 +21,7 @@ public class WorldInputListener implements KeyListener, MouseListener, MouseWhee
 
     @Override
     public void keyTyped(KeyEvent e) {
+        //Nothing is done here
     }
 
     @Override
@@ -35,6 +36,7 @@ public class WorldInputListener implements KeyListener, MouseListener, MouseWhee
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        //Nothing is done here
     }
 
     @Override
@@ -59,10 +61,12 @@ public class WorldInputListener implements KeyListener, MouseListener, MouseWhee
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        //Nothing is done here
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        //Nothing is done here
     }
 
     @Override
@@ -95,8 +99,8 @@ public class WorldInputListener implements KeyListener, MouseListener, MouseWhee
     }
 
     public void handlePressedMouseButtons(WorldView view) {
-        double deltaX = MouseInfo.getPointerInfo().getLocation().x - lastPosition.x;
-        double deltaY = MouseInfo.getPointerInfo().getLocation().y - lastPosition.y;
+        double deltaX = (double) MouseInfo.getPointerInfo().getLocation().x - lastPosition.x;
+        double deltaY = (double) MouseInfo.getPointerInfo().getLocation().y - lastPosition.y;
 
         if (rightButtonPressed || leftButtonPressed) {
             if (Math.abs(deltaX) > 0) {

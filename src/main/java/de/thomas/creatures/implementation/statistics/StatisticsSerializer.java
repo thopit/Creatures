@@ -1,6 +1,4 @@
-package de.thomas.creatures.implementation.files;
-
-import de.thomas.creatures.implementation.statistics.StatElement;
+package de.thomas.creatures.implementation.statistics;
 
 import java.io.File;
 import java.io.FileWriter;

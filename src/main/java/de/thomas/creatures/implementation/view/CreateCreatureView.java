@@ -11,13 +11,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Point2D;
 
 public class CreateCreatureView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
 
-    private WorldController worldController;
-    private double width;
-    private double height;
+    private transient WorldController worldController;
+    private double sizeX;
+    private double sizeY;
 
     private JPanel backPanel;
     private JTextField maxEnergyInput;
@@ -33,21 +34,21 @@ public class CreateCreatureView extends JFrame implements ActionListener {
     private JButton createButton;
 
     //TODO Default values (Save if changed)
-    public CreateCreatureView(WorldController worldController, double width, double height) {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public CreateCreatureView(WorldController worldController, double sizeX, double sizeY) {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(300, 300);
         setLocationRelativeTo(null);
         setTitle("Create Creature");
 
         this.worldController = worldController;
-        this.width = width;
-        this.height = height;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
 
         initUI();
 
         setResizable(true);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 
@@ -169,8 +170,8 @@ public class CreateCreatureView extends JFrame implements ActionListener {
             AssertionHelper.checkSmallerZero(breedLength, "Breed Length");
             AssertionHelper.checkSmallerZero(breedProgressSpeed, "Breed Progress Speed");
 
-            AssertionHelper.checkSmallerEqualThan(positionX, width, "Position X");
-            AssertionHelper.checkSmallerEqualThan(positionY, height, "Position Y");
+            AssertionHelper.checkSmallerEqualThan(positionX, sizeX, "Position X");
+            AssertionHelper.checkSmallerEqualThan(positionY, sizeY, "Position Y");
         } catch (AssertionException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Wrong input", JOptionPane.WARNING_MESSAGE);
             return;
@@ -186,7 +187,7 @@ public class CreateCreatureView extends JFrame implements ActionListener {
                 maxEnergy,
                 maxEnergy,
                 maxLife,
-                new Point.Double(positionX, positionY),
+                new Point2D.Double(positionX, positionY),
                 speed,
                 visionRange,
                 gnd,

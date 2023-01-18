@@ -8,12 +8,13 @@ import de.thomas.creatures.implementation.model.Food;
 import de.thomas.creatures.implementation.model.WorldModel;
 import de.thomas.creatures.implementation.util.VariationHelper;
 
-import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class WorldUpdater {
+    public static final double MIN_DISTANCE = 1.25;
     private WorldModel worldModel;
     private WorldController worldController;
     private List<Creature> newBornList = new ArrayList<>();
@@ -54,12 +55,12 @@ public class WorldUpdater {
     private void handleMoving(double delta, Creature creature) {
         //TODO Maybe only compute stuff if target changes, else let speed be the same
 
-        Point.Double target = creature.getTarget();
-        Point.Double position = creature.getPosition();
+        Point2D.Double target = creature.getTarget();
+        Point2D.Double position = creature.getPosition();
 
         //Move nearer to target
         if (target != null) {
-            if (target.distance(position) > (creature.getSpeed() * delta * WorldModel.speedFactor * 1.25)) {
+            if (target.distance(position) > (creature.getSpeed() * delta * WorldModel.speedFactor * MIN_DISTANCE)) {
                 double x = target.x - position.x;
                 double y = target.y - position.y;
                 double speed = creature.getSpeed() * delta * WorldModel.speedFactor;
@@ -72,7 +73,7 @@ public class WorldUpdater {
                 creature.getPosition().x += speedX;
                 creature.getPosition().y += speedY;
             } else {
-                creature.setPosition(new Point.Double(creature.getTarget().x, creature.getTarget().y));
+                creature.setPosition(new Point2D.Double(creature.getTarget().x, creature.getTarget().y));
                 creature.setTarget(null);
             }
         }
@@ -165,7 +166,7 @@ public class WorldUpdater {
                 double xPos = worldModel.getWidth() * Math.random();
                 double yPos = worldModel.getHeight() * Math.random();
 
-                Food food = new Food(new Point.Double(xPos, yPos), (int) (Math.random() * WorldModel.maxFoodEnergy));
+                Food food = new Food(new Point2D.Double(xPos, yPos), (int) (Math.random() * WorldModel.maxFoodEnergy));
                 worldModel.addFood(food);
             }
         }
@@ -177,10 +178,10 @@ public class WorldUpdater {
         } else {
             creature.setBreedTime(creature.getBreedLength());
             creature.setPregnant(false);
-            Point.Double motherPosition = creature.getPosition();
+            Point2D.Double motherPosition = creature.getPosition();
 
             Creature newBorn = creature.getFetus();
-            newBorn.setPosition(new Point.Double(motherPosition.x, motherPosition.y));
+            newBorn.setPosition(new Point2D.Double(motherPosition.x, motherPosition.y));
 
             newBornList.add(newBorn);
             creature.setFetus(null);
@@ -192,14 +193,16 @@ public class WorldUpdater {
         double maxEnergy = ((father.getMaxEnergy() + mother.getMaxEnergy()) / 2) * VariationHelper.mutationFactor(WorldModel.mutationRate);
         double maxLife = ((father.getMaxLife() + mother.getMaxLife()) / 2) * VariationHelper.mutationFactor(WorldModel.mutationRate);
         //Position will be added later
-        Point.Double position = null;
+        Point2D.Double position = null;
         double speed = ((father.getSpeed() + mother.getSpeed()) / 2) * VariationHelper.mutationFactor(WorldModel.mutationRate);
         double visionRange = ((father.getVisionRange() + mother.getVisionRange()) / 2) * VariationHelper.mutationFactor(WorldModel.mutationRate);
         Gender gender;
-        if (Math.random() >= 0.5)
+        if (Math.random() >= 0.5) {
             gender = Gender.MALE;
-        else
+        }
+        else {
             gender = Gender.FEMALE;
+        }
         CreatureAI ai = new BasicAI();
         double matingEnergyNeeded = ((father.getMatingEnergyNeeded() + mother.getMatingEnergyNeeded()) / 2)
                 * VariationHelper.mutationFactor(WorldModel.mutationRate);

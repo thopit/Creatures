@@ -3,7 +3,7 @@ package de.thomas.creatures.implementation.model;
 import de.thomas.creatures.implementation.ai.CreatureAI;
 import de.thomas.creatures.implementation.ai.DoNothingAI;
 
-import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class Creature {
     private double life;
@@ -11,7 +11,7 @@ public class Creature {
     private double maxLife;
     private double energy;
     private double maxEnergy;
-    private Point.Double position;
+    private Point2D.Double position;
     private double speed;
     private double visionRange;
     private Gender gender;
@@ -22,10 +22,10 @@ public class Creature {
     private double breedTime;
     private boolean pregnant;
     private Creature fetus;
-    private Point.Double target;
+    private Point2D.Double target;
 
     //For test purposes
-    public Creature(Point.Double position, Gender gender) {
+    public Creature(Point2D.Double position, Gender gender) {
         this(
                 1000,
                 1000,
@@ -44,7 +44,7 @@ public class Creature {
             double energy,
             double maxEnergy,
             double maxLife,
-            Point.Double position,
+            Point2D.Double position,
             double speed,
             double visionRange,
             Gender gender,
@@ -75,11 +75,11 @@ public class Creature {
         ai.update();
     }
 
-    public Point.Double getPosition() {
+    public Point2D.Double getPosition() {
         return position;
     }
 
-    public void setPosition(Point.Double position) {
+    public void setPosition(Point2D.Double position) {
         this.position = position;
     }
 
@@ -99,11 +99,11 @@ public class Creature {
         this.gender = gender;
     }
 
-    public Point.Double getTarget() {
+    public Point2D.Double getTarget() {
         return target;
     }
 
-    public void setTarget(Point.Double target) {
+    public void setTarget(Point2D.Double target) {
         this.target = target;
     }
 

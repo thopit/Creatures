@@ -2,10 +2,10 @@ package de.thomas.creatures.implementation.view;
 
 import de.thomas.creatures.implementation.WorldCreator;
 import de.thomas.creatures.implementation.controller.WorldController;
-import de.thomas.creatures.implementation.files.StatisticsSerializer;
 import de.thomas.creatures.implementation.model.WorldModel;
 import de.thomas.creatures.implementation.statistics.StatElement;
 import de.thomas.creatures.implementation.statistics.Statistics;
+import de.thomas.creatures.implementation.statistics.StatisticsSerializer;
 import org.apache.commons.io.FilenameUtils;
 
 import javax.swing.*;
@@ -21,10 +21,10 @@ import java.util.ArrayList;
 public class MainWindow extends JFrame implements ActionListener, ChangeListener {
     private static final long serialVersionUID = 1L;
     private WorldView view;
-    private Statistics statistics;
-    private WorldController controller;
-    private WorldCreator worldCreator;
-    private WorldModel worldModel;
+    private transient Statistics statistics;
+    private transient WorldController controller;
+    private transient WorldCreator worldCreator;
+    private transient WorldModel worldModel;
 
     private JSplitPane splitPane;
 
@@ -34,7 +34,7 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
     private JLabel maxFoodLabel;
     private JSpinner maxFoodSpinner;
 
-    private JMenuBar menuBar;
+    private JMenuBar mainMenuBar;
     private JMenu fileMenu;
     private JMenuItem exportStatisticsItem;
     private JMenuItem closeItem;
@@ -58,7 +58,7 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
 
         initUI(view);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(1366, 768);
         setLocationRelativeTo(null);
         setTitle("Creatures");
@@ -110,7 +110,7 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
 
         add(splitPane);
 
-        menuBar = new JMenuBar();
+        mainMenuBar = new JMenuBar();
 
         fileMenu = new JMenu("File");
         exportStatisticsItem = new JMenuItem("Export Statistics");
@@ -138,11 +138,11 @@ public class MainWindow extends JFrame implements ActionListener, ChangeListener
         showStatisticsItem.addActionListener(this);
         statisticsMenu.add(showStatisticsItem);
 
-        menuBar.add(fileMenu);
-        menuBar.add(worldMenu);
-        menuBar.add(statisticsMenu);
+        mainMenuBar.add(fileMenu);
+        mainMenuBar.add(worldMenu);
+        mainMenuBar.add(statisticsMenu);
 
-        setJMenuBar(menuBar);
+        setJMenuBar(mainMenuBar);
     }
 
     public void update(double delta) {

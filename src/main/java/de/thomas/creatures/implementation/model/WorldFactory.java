@@ -1,21 +1,18 @@
-package de.thomas.creatures.implementation.factories;
+package de.thomas.creatures.implementation.model;
 
 import de.thomas.creatures.implementation.ai.BasicAI;
 import de.thomas.creatures.implementation.ai.CreatureAI;
-import de.thomas.creatures.implementation.model.Creature;
 import de.thomas.creatures.implementation.model.Creature.Gender;
-import de.thomas.creatures.implementation.model.Food;
-import de.thomas.creatures.implementation.model.WorldModel;
 
-import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class WorldFactory {
 
     public static WorldModel createTestWorld() {
         WorldModel world = new WorldModel(1000, 800, 50);
-        Creature[] creatures = {new Creature(new Point.Double(100, 100), Gender.MALE),
-                new Creature(new Point.Double(200, 100), Gender.FEMALE)};
-        //Creature[] creatures = {new Creature(new Point.Double(100, 100), Gender.MALE)};
+        Creature[] creatures = {new Creature(new Point2D.Double(100, 100), Gender.MALE),
+                new Creature(new Point2D.Double(200, 100), Gender.FEMALE)};
+        //Creature[] creatures = {new Creature(new Point2D.Double(100, 100), Gender.MALE)};
 
         CreatureAI ai = new BasicAI();
 
@@ -26,8 +23,8 @@ public class WorldFactory {
         ai.init();
 
 
-        Food[] foods = {new Food(new Point.Double(150, 150), 100),
-                new Food(new Point.Double(230, 80), 100)
+        Food[] foods = {new Food(new Point2D.Double(150, 150), 100),
+                new Food(new Point2D.Double(230, 80), 100)
         };
 
         for (Creature c : creatures) {
@@ -61,7 +58,7 @@ public class WorldFactory {
                 gender = Gender.FEMALE;
             }
 
-            creatures[i] = new Creature(new Point.Double(posX, posY), gender);
+            creatures[i] = new Creature(new Point2D.Double(posX, posY), gender);
 
             CreatureAI ai = new BasicAI();
             creatures[i].setAi(ai);
@@ -77,7 +74,7 @@ public class WorldFactory {
         for (int i = 0; i < creatureAmount * 10; i++) {
             double posX = width * Math.random();
             double posY = height * Math.random();
-            foods[i] = new Food(new Point.Double(posX, posY), (int) (Math.random() * 100));
+            foods[i] = new Food(new Point2D.Double(posX, posY), (int) (Math.random() * 100));
 
             world.addFood(foods[i]);
         }

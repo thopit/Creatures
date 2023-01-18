@@ -2,8 +2,8 @@ package de.thomas.creatures.implementation;
 
 
 import de.thomas.creatures.implementation.controller.WorldController;
-import de.thomas.creatures.implementation.factories.WorldFactory;
 import de.thomas.creatures.implementation.model.Creature;
+import de.thomas.creatures.implementation.model.WorldFactory;
 import de.thomas.creatures.implementation.model.WorldModel;
 import de.thomas.creatures.implementation.statistics.Statistics;
 import de.thomas.creatures.implementation.view.MainWindow;

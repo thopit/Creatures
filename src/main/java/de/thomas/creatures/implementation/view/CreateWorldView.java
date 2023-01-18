@@ -1,7 +1,7 @@
 package de.thomas.creatures.implementation.view;
 
 import de.thomas.creatures.implementation.WorldCreator;
-import de.thomas.creatures.implementation.factories.WorldFactory;
+import de.thomas.creatures.implementation.model.WorldFactory;
 import de.thomas.creatures.implementation.model.WorldModel;
 import de.thomas.creatures.implementation.util.AssertionException;
 import de.thomas.creatures.implementation.util.AssertionHelper;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 public class CreateWorldView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
 
-    private WorldCreator worldCreator;
+    private transient WorldCreator worldCreator;
 
     private JPanel backPanel;
     private JLabel widthLabel;
@@ -28,7 +28,7 @@ public class CreateWorldView extends JFrame implements ActionListener {
     public CreateWorldView(WorldCreator worldCreator) {
         this.worldCreator = worldCreator;
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(220, 150);
         setLocationRelativeTo(null);
         setTitle("Create World");
@@ -37,7 +37,7 @@ public class CreateWorldView extends JFrame implements ActionListener {
 
         setResizable(true);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 

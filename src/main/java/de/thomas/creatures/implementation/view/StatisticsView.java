@@ -63,7 +63,7 @@ public class StatisticsView extends JFrame implements ActionListener {
     public StatisticsView(List<StatElement> statElements) {
         this.statElements = statElements;
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(1366, 768);
         setLocationRelativeTo(null);
         setTitle("Statistics");
@@ -72,7 +72,7 @@ public class StatisticsView extends JFrame implements ActionListener {
 
         setResizable(true);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     private void initUI(List<StatElement> statElements) {

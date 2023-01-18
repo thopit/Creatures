@@ -3,12 +3,12 @@ package de.thomas.creatures.implementation.ai;
 import de.thomas.creatures.implementation.model.Creature;
 import de.thomas.creatures.implementation.model.Food;
 
-import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BasicAI extends CreatureAI {
-    private final List<Point.Double> wayPoints;
+    private final List<Point2D.Double> wayPoints;
 
     public BasicAI() {
         wayPoints = new ArrayList<>();
@@ -31,7 +31,7 @@ public class BasicAI extends CreatureAI {
 
         for (int y = 0; y < wayPointNumberY; y++) {
             for (int x = 0; x < wayPointNumberX; x++) {
-                Point.Double point = new Point.Double(x * deviationX + Math.random() * maxRandom,
+                Point2D.Double point = new Point2D.Double(x * deviationX + Math.random() * maxRandom,
                         y * deviationY + Math.random() * maxRandom);
 
                 wayPoints.add(point);
@@ -43,7 +43,7 @@ public class BasicAI extends CreatureAI {
     public void update() {
         //Move random
         if (creature.getTarget() == null) {
-            Point.Double point = wayPoints.get((int) (Math.random() * wayPoints.size()));
+            Point2D.Double point = wayPoints.get((int) (Math.random() * wayPoints.size()));
             creature.setTarget(point);
         }
 
@@ -100,7 +100,7 @@ public class BasicAI extends CreatureAI {
         return nearestMate;
     }
 
-    public List<Point.Double> getWayPoints() {
+    public List<Point2D.Double> getWayPoints() {
         return wayPoints;
     }
 }

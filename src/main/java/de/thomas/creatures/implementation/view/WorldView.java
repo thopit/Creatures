@@ -8,13 +8,13 @@ import de.thomas.creatures.implementation.model.WorldModel;
 import javax.swing.*;
 import java.awt.*;
 
-@SuppressWarnings("serial")
 public class WorldView extends JPanel {
+    private static final long serialVersionUID = 5628493124295876371L;
     public static int CREATURE_SIZE = 12;
     public static int FOOD_SIZE = 8;
     public static boolean DEBUG_MODE = true;
 
-    private WorldModel world;
+    private transient WorldModel world;
 
     private int zoomFactor;
     private int offsetX;
@@ -33,8 +33,8 @@ public class WorldView extends JPanel {
         //Draw food
         g.setColor(new Color(116, 195, 101));
         for (Food food : world.getFoods()) {
-            g.fillOval((int) (food.getPosition().x / zoomFactor + offsetX / zoomFactor),
-                    (int) (food.getPosition().y / zoomFactor + offsetY / zoomFactor),
+            g.fillOval((int) (food.getPosition().x / zoomFactor + (double) offsetX / zoomFactor),
+                    (int) (food.getPosition().y / zoomFactor + (double) offsetY / zoomFactor),
                     FOOD_SIZE / zoomFactor,
                     FOOD_SIZE / zoomFactor);
         }
@@ -47,8 +47,8 @@ public class WorldView extends JPanel {
                 g.setColor(new Color(255, 0, 0));
             }
 
-            g.fillOval((int) (creature.getPosition().x / zoomFactor + offsetX / zoomFactor),
-                    (int) (creature.getPosition().y / zoomFactor + offsetY / zoomFactor),
+            g.fillOval((int) (creature.getPosition().x / zoomFactor + (double) offsetX / zoomFactor),
+                    (int) (creature.getPosition().y / zoomFactor + (double) offsetY / zoomFactor),
                     CREATURE_SIZE / zoomFactor,
                     CREATURE_SIZE / zoomFactor);
         }
@@ -56,12 +56,12 @@ public class WorldView extends JPanel {
         if (DEBUG_MODE) {
             for (Creature creature : world.getCreatures()) {
                 g.setColor(Color.black);
-                String displayString = String.valueOf((int) ((creature.getLife() / creature.getMaxLife()) * 100)) + " | "
-                        + String.valueOf((int) creature.getEnergy());
+                String displayString = ((int) ((creature.getLife() / creature.getMaxLife()) * 100)) + " | "
+                        + ((int) creature.getEnergy());
 
                 g.drawString(displayString,
-                        (int) (creature.getPosition().x / zoomFactor + offsetX / zoomFactor),
-                        (int) (creature.getPosition().y / zoomFactor + offsetY / zoomFactor));
+                        (int) (creature.getPosition().x / zoomFactor + (double) offsetX / zoomFactor),
+                        (int) (creature.getPosition().y / zoomFactor + (double) offsetY / zoomFactor));
             }
         }
     }

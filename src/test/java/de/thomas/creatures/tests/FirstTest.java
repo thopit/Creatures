@@ -7,8 +7,6 @@ import de.thomas.creatures.implementation.model.Creature.Gender;
 import de.thomas.creatures.implementation.model.WorldModel;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO Add tests!
@@ -21,7 +19,7 @@ public class FirstTest {
         int foodCreationRate = 50;
 
         WorldModel model = new WorldModel(width, height, foodCreationRate);
-        Creature creature = new Creature(new Point.Double(100, 100), Gender.MALE);
+        Creature creature = new Creature(new Point2D.Double(100, 100), Gender.MALE);
 
         BasicAI basicAI = new BasicAI();
         basicAI.setCreature(creature);
@@ -29,7 +27,7 @@ public class FirstTest {
 
         basicAI.init();
 
-        for (Point.Double p : basicAI.getWayPoints()) {
+        for (Point2D.Double p : basicAI.getWayPoints()) {
             assertEquals(true, p.x <= width);
             assertEquals(true, p.x >= 0);
             assertEquals(true, p.y <= height);

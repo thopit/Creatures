@@ -12,13 +12,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Point2D;
 
 public class CreateCreaturesView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
 
-    private WorldController worldController;
-    private double width;
-    private double height;
+    private transient WorldController worldController;
+    private double sizeX;
+    private double sizeY;
 
     private JPanel backPanel;
 
@@ -43,12 +44,12 @@ public class CreateCreaturesView extends JFrame implements ActionListener {
     private JButton createButton;
 
     //TODO Default Values
-    public CreateCreaturesView(WorldController worldController, double width, double height) {
+    public CreateCreaturesView(WorldController worldController, double sizeX, double sizeY) {
         this.worldController = worldController;
-        this.width = width;
-        this.height = height;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(350, 300);
         setLocationRelativeTo(null);
         setTitle("Create Creatures (With Variance)");
@@ -57,7 +58,7 @@ public class CreateCreaturesView extends JFrame implements ActionListener {
 
         setResizable(true);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 
@@ -239,14 +240,14 @@ public class CreateCreaturesView extends JFrame implements ActionListener {
             else
                 gnd = Gender.MALE;
 
-            double middleWidth = width / 2;
-            double middleHeight = height / 2;
+            double middleWidth = sizeX / 2;
+            double middleHeight = sizeY / 2;
 
             Creature creature = new Creature(
                     maxEnergy,
                     maxEnergy * VariationHelper.mutationFactor(maxEnergyVariance / maxEnergy),
                     maxLife * VariationHelper.mutationFactor(maxLifeVariance / maxLife),
-                    new Point.Double
+                    new Point2D.Double
                             (middleWidth * VariationHelper.mutationFactor(0.95),
                                     middleHeight * VariationHelper.mutationFactor(0.95)),
                     speed * VariationHelper.mutationFactor(speedVariance / speed),
