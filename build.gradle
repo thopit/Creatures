@@ -6,22 +6,31 @@ version = '0.7'
 mainClassName = "de.thomas.creatures.implementation.CreaturesMain"
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	compile 'jfree:jcommon:1.0.16'
-	compile 'jfree:jfreechart:1.0.13'
-	compile 'commons-io:commons-io:2.4'
-	testCompile group: 'junit', name: 'junit', version: '4+'
+    implementation group: 'org.jfree', name: 'jcommon', version: '1.0.24'
+    implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.4'
+    implementation 'commons-io:commons-io:2.11.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+}
+
+application {
+    mainClassName = mainClassName
+}
+
+test {
+    useJUnitPlatform()
 }
 
 jar {
-	manifest {
+    manifest {
         attributes 'Main-Class': project.mainClassName
     }
-	
-	from {
-		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-	}
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
