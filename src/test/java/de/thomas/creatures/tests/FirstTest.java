@@ -7,6 +7,8 @@ import de.thomas.creatures.implementation.model.Creature.Gender;
 import de.thomas.creatures.implementation.model.WorldModel;
 import org.junit.jupiter.api.Test;
 
+import java.awt.geom.Point2D;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO Add tests!
