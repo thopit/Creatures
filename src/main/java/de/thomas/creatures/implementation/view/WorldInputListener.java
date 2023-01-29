@@ -98,17 +98,17 @@ public class WorldInputListener implements KeyListener, MouseListener, MouseWhee
         }
     }
 
-    public void handlePressedMouseButtons(WorldView view) {
+    public void handlePressedMouseButtons(int zoomFactor) {
         double deltaX = (double) MouseInfo.getPointerInfo().getLocation().x - lastPosition.x;
         double deltaY = (double) MouseInfo.getPointerInfo().getLocation().y - lastPosition.y;
 
         if (rightButtonPressed || leftButtonPressed) {
             if (Math.abs(deltaX) > 0) {
-                controller.changeOffsetX(((int) deltaX) * view.getZoomFactor());
+                controller.changeOffsetX(((int) deltaX) * zoomFactor);
             }
 
             if (Math.abs(deltaY) > 0) {
-                controller.changeOffsetY(((int) deltaY) * view.getZoomFactor());
+                controller.changeOffsetY(((int) deltaY) * zoomFactor);
             }
         }
 

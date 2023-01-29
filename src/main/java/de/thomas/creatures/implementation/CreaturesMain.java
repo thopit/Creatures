@@ -77,7 +77,7 @@ public class CreaturesMain implements WorldCreator, ActionListener {
         lastTime = currentTime;
 
         listener.handlePressedKeys();
-        listener.handlePressedMouseButtons(view);
+        listener.handlePressedMouseButtons(view.getZoomFactor());
 
         view.repaint();
 
