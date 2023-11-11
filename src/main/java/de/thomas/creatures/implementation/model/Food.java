@@ -1,29 +1,29 @@
 package de.thomas.creatures.implementation.model;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 public class Food {
-	private Point.Double position;
-	private int value;
-	
-	public Food(Point.Double position, int value) {
-		this.position = position;
-		this.value = value;
-	}
+    private Point2D.Double position;
+    private int value;
 
-	public Point.Double getPosition() {
-		return position;
-	}
+    public Food(Point2D.Double position, int value) {
+        this.position = position;
+        this.value = value;
+    }
 
-	public void setPosition(Point.Double position) {
-		this.position = position;
-	}
+    public Point2D.Double getPosition() {
+        return position;
+    }
 
-	public int getValue() {
-		return value;
-	}
+    public void setPosition(Point2D.Double position) {
+        this.position = position;
+    }
 
-	public void setValue(int value) {
-		this.value = value;
-	}
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }
