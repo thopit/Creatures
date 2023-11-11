@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.awt.geom.Point2D;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //TODO Add tests!
 public class FirstTest {
@@ -30,10 +31,10 @@ public class FirstTest {
         basicAI.init();
 
         for (Point2D.Double p : basicAI.getWayPoints()) {
-            assertEquals(true, p.x <= width);
-            assertEquals(true, p.x >= 0);
-            assertEquals(true, p.y <= height);
-            assertEquals(true, p.y >= 0);
+            assertTrue(p.x <= width);
+            assertTrue(p.x >= 0);
+            assertTrue(p.y <= height);
+            assertTrue(p.y >= 0);
         }
     }
 }
